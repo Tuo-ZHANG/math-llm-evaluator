@@ -30,12 +30,38 @@ body {
   }
   
   #response {
-    margin-top: 20px;
-    padding: 10px;
-    border: 1px solid #ddd;
+    flex: 1;
+    padding: 16px;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    min-height: 100px;
-  }
+    background-color: #f9f9f9;
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 500px; /* Set a fixed maximum height */
+    height: 500px; /* Set a fixed height */
+    white-space: pre-wrap;
+    font-family: system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+/* Customize scrollbar appearance */
+#response::-webkit-scrollbar {
+    width: 8px;
+}
+
+#response::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#response::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#response::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
   
   .loading {
     opacity: 0.5;

@@ -2,6 +2,11 @@ const CLAUDE_API_KEY = "sk-ant-api03-4ND6Xhw4HU0PLO4Tc3j9Za4UbG0xt79S5NTspaD9V4Z
 const CLAUDE_API_URL = "https://api.anthropic.com/v1/messages";
 
 
+function updateUI(fullContent) {
+    const responseElement = document.getElementById("response");
+    responseElement.textContent = fullContent;
+}
+
 async function askDeepseek(prompt) {
     try {
         const url = 'https://api.hyperbolic.xyz/v1/chat/completions';
@@ -20,17 +25,46 @@ async function askDeepseek(prompt) {
                 content: prompt
                 }
             ],
-            max_tokens: 508,
+            max_tokens: 1024,
             temperature: 0.1,
             top_p: 0.9,
-            stream: false
+            stream: true
             }),
         });
-        const json = await response.json();
+    // Get the response as a readable stream
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let fullContent = "";
 
-        const output = json.choices[0].message.content;
-        
-      return output;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      // Decode the stream chunk
+      const chunk = decoder.decode(value);
+      const lines = chunk.split("\n");
+
+      // Process each line
+      for (const line of lines) {
+        if (line.startsWith("data: ")) {
+          if (line.includes("[DONE]")) continue;
+          
+          try {
+            const jsonData = JSON.parse(line.replace("data: ", ""));
+            const content = jsonData.choices[0].delta.content;
+            if (content) {
+              fullContent += content;
+              // Update UI immediately with each chunk
+              updateUI(fullContent);
+            }
+          } catch (e) {
+            console.error("Error parsing JSON:", e);
+          }
+        }
+      }
+    }
+
+    return fullContent;
     } catch (error) {
       console.error("Error:", error);
       return "Error: " + error.message;
@@ -54,9 +88,7 @@ async function sendPrompt() {
 
   try {
     // const response = await askClaude(prompt);
-    const response = await askDeepseek(prompt);
-
-    responseElement.textContent = response;
+    askDeepseek(prompt);
   } catch (error) {
     console.log(error)
     responseElement.textContent = "Error: " + error.message;
