@@ -1,4 +1,12 @@
-{
-    "question": "What is 25 + 17?",
-    "answer": 42
-}
+[
+    {
+      "question": "Find the last 3 digits of the sum of all elements common to sets A and B. A={1,4,7,10,…,3×2024+1} B={2,6,10,14,…,4×2024+2}",
+      "answer": 240,
+      "expectedOutput": "numeric"
+    },
+    {
+      "question": "In a list of 5 positive integers, the mean and mode are 5. Find the largest possible population variance.",
+      "answer": 14.8,
+      "expectedOutput": "numeric"
+    }
+]

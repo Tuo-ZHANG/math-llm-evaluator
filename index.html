@@ -11,7 +11,7 @@
       <h1>API Demo</h1>
 
       <!-- Textarea for entering a prompt -->
-      <textarea id="prompt" placeholder="Enter your prompt here..."></textarea>
+      <textarea id="prompt">please answer the question set in json format, you could just fill the answer field of each question</textarea>
       <button onclick="sendPrompt()">Send to chatbot</button>
 
       <!-- File input for uploading JSON -->
@@ -23,7 +23,7 @@
       <!-- Display area for the uploaded JSON -->
       <h2>Uploaded JSON Content:</h2>
       <pre id="jsonContent">No file uploaded yet.</pre>
-
+      <div id="accuracy"> accuracy: </div>
       <div id="response"></div>
     </div>
 
