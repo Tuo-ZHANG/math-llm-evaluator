@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Demo</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>API Demo</h1>
+
+      <!-- Textarea for entering a prompt -->
+      <textarea id="prompt" placeholder="Enter your prompt here..."></textarea>
+      <button onclick="sendPrompt()">Send to chatbot</button>
+
+      <!-- File input for uploading JSON -->
+      <div>
+        <input type="file" id="fileUpload" accept=".json" />
+        <button onclick="uploadJSON()">Upload JSON</button>
+      </div>
+
+      <!-- Display area for the uploaded JSON -->
+      <h2>Uploaded JSON Content:</h2>
+      <pre id="jsonContent">No file uploaded yet.</pre>
+
+      <div id="response"></div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
